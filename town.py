@@ -428,6 +428,16 @@ def format_wh(wh: float) -> str:
     return f"{wh / 1_000_000:.1f}MWh"
 
 
+def parse_wh(s: str) -> float:
+    """Parse a Wh value with optional unit suffix. '500' / '5kwh' / '5MWh' / '0.5gwh'."""
+    s = s.strip().lower().replace(",", "").replace(" ", "")
+    multipliers = {"gwh": 1e9, "mwh": 1e6, "kwh": 1e3, "wh": 1.0}
+    for suffix, mul in multipliers.items():
+        if s.endswith(suffix):
+            return float(s[: -len(suffix)]) * mul
+    return float(s)
+
+
 def tier_slug(wh: float) -> str:
     """Filename slug for a screenshot at this Wh — e.g. '5kwh', '500wh', '5mwh'."""
     if wh < 1000:
@@ -479,4 +489,12 @@ def add_subparser(sub) -> None:
         type=Path,
         metavar="DIR",
         help="Headless: render every unlock tier as a PNG into DIR and exit.",
+    )
+    p.add_argument(
+        "--wh",
+        type=parse_wh,
+        metavar="N",
+        help="Inject a fake Wh total instead of reading transcripts. "
+             "Accepts plain number ('5000') or suffix ('50kwh', '5mwh'). "
+             "Useful for previewing tiers and capturing screenshots.",
     )

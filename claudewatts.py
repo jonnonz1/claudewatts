@@ -530,6 +530,8 @@ def build_parser() -> argparse.ArgumentParser:
         p_town = sub.add_parser("town", help="(needs pyxel) Cyberpunk city that grows with your Wh.")
         p_town.add_argument("--screenshot", type=Path, metavar="DIR",
                             help="Render every unlock tier as a PNG into DIR and exit.")
+        p_town.add_argument("--wh", default=None,
+                            help="Inject a fake Wh total (needs pyxel installed to render).")
     return parser
 
 
@@ -553,9 +555,12 @@ def main(argv: list[str] | None = None) -> int:
                 file=sys.stderr,
             )
             return 1
-        projects_dir = getattr(args, "projects_dir", default_projects_dir())
-        agg = aggregate(projects_dir, None, None)
-        return _town.run(agg.total.wh, screenshot_dir=args.screenshot)
+        if args.wh is not None:
+            total_wh = args.wh
+        else:
+            projects_dir = getattr(args, "projects_dir", default_projects_dir())
+            total_wh = aggregate(projects_dir, None, None).total.wh
+        return _town.run(total_wh, screenshot_dir=args.screenshot)
 
     session_transcript = getattr(args, "session_transcript", None)
     repo_path = getattr(args, "repo", None)
