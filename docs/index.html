@@ -29,8 +29,51 @@
 
 <section class="terminal">
   <pre><code><span class="prompt">$</span> cwatts statusline
-<span class="bolt">⚡</span> 2× active · 3.4 Wh session · 10.9 kWh today · 342.7 kWh total <span class="dim">(≈ powering 11 US homes for a day)</span></code></pre>
+<span class="bolt">⚡</span> 2× active · 3.4 Wh session · 10.9 kWh today · 342.7 kWh total <span class="dim">(≈ <span id="rotating-comparison">powering 11 US homes for a day</span>)</span></code></pre>
+  <p class="dim hint">↑ that comparison rotates — same total, different framings. Try <code>cwatts statusline</code> yourself.</p>
 </section>
+
+<script>
+// Mirrors the COMPARISONS + POWER_USES tables in claudewatts.py / town.py.
+// All phrasings represent the same ~342.7 kWh total, picked to land in feel-able units.
+const COMPARISONS = [
+  "powering 11 US homes for a day",
+  "powering 4 small villages for a day",
+  "1.1 million Google searches",
+  "boiling 3,427 kettles",
+  "228 days of running a fridge",
+  "23,000 phone charges",
+  "powering 14 toasters for a day",
+  "powering 80 fridges for a week",
+  "powering 14 hair dryers for a day",
+  "powering 7 EV home chargers for an hour",
+  "powering 1 small village for 3 hours",
+  "685 loads of laundry",
+  "powering 142 electric ovens for an hour",
+  "powering 1 data centre rack for a day",
+  "powering 1 hot tub for a week",
+  "powering 9 microwaves for a day",
+  "powering 685 laptops for a week",
+  "34,270 LED bulb-hours",
+];
+
+(function () {
+  const el = document.getElementById('rotating-comparison');
+  if (!el) return;
+  let i = 0;
+  // Shuffle so each visit starts somewhere different.
+  COMPARISONS.sort(() => Math.random() - 0.5);
+  setInterval(() => {
+    i = (i + 1) % COMPARISONS.length;
+    el.style.transition = 'opacity 0.25s';
+    el.style.opacity = '0';
+    setTimeout(() => {
+      el.textContent = COMPARISONS[i];
+      el.style.opacity = '1';
+    }, 250);
+  }, 2600);
+})();
+</script>
 
 <section>
   <h2>what it does</h2>

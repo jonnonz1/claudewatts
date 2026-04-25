@@ -115,6 +115,11 @@ pip install 'claudewatts[town]'
 cwatts town
 ```
 
+| | | | |
+|:-:|:-:|:-:|:-:|
+| ![500 Wh](docs/assets/town-500wh.png) | ![5 kWh](docs/assets/town-5kwh.png) | ![50 kWh](docs/assets/town-50kwh.png) | ![5 MWh](docs/assets/town-5mwh.png) |
+| **500 Wh** — shack | **5 kWh** — row of cubes | **50 kWh** — first tower | **5 MWh** — arcology |
+
 Tech tree (every threshold adds one visible thing):
 
 | Wh         | Unlock          |
@@ -132,10 +137,17 @@ Tech tree (every threshold adds one visible thing):
 | 5 MWh      | arcology        |
 | 50 MWh     | sky platforms   |
 
+Preview any tier without waiting for real usage:
+
+```bash
+cwatts town --wh 50kwh        # see the "first tower" tier
+cwatts town --wh 5mwh         # see the "arcology" tier
+```
+
 To regenerate the per-tier screenshots used on the project page:
 
 ```bash
-cwatts town --screenshot docs/assets/
+./scripts/generate-screenshots.sh
 ```
 
 ## Caveats, clearly stated

@@ -321,24 +321,15 @@ DRAWERS: list = [
 class TownApp:
     """Runs the pyxel main loop; renders the town for `total_wh`."""
 
-    def __init__(self, total_wh: float, screenshot_dir: Path | None = None):
+    def __init__(self, total_wh: float):
         self.total_wh = total_wh
         self.unlocked = unlocked_count(total_wh)
         self.frame = 0
-        self.screenshot_dir = screenshot_dir
-        self._screenshot_taken = False
 
         pyxel.init(WIDTH, HEIGHT, title="claudewatts // town", fps=30, quit_key=pyxel.KEY_Q)
         for i, hex_col in enumerate(PALETTE):
             pyxel.colors[i] = hex_col
-
-        if screenshot_dir is None:
-            pyxel.run(self.update, self.draw)
-        else:
-            # Headless screenshot mode: render one frame, save, exit.
-            self.draw()
-            self._take_screenshot()
-            pyxel.quit()
+        pyxel.run(self.update, self.draw)
 
     def update(self) -> None:
         self.frame += 1
@@ -403,15 +394,53 @@ class TownApp:
         else:
             pyxel.text(WIDTH - 56, HEIGHT - 6, "MAX TIER REACHED", ACID)
 
-    def _take_screenshot(self) -> None:
-        if self._screenshot_taken:
+
+class ScreenshotSession(TownApp):
+    """Single pyxel.run() pass that snaps every tier in sequence then quits.
+
+    Pyxel can only be initialised once per process, and screenshots must be
+    taken from inside the run loop after a frame has been drawn — so we
+    drive the whole sweep through one update/draw cycle.
+    """
+
+    FRAMES_PER_TIER = 3  # let a couple of frames render before snapping
+
+    def __init__(self, out_dir: Path, tiers: list[float] | None = None):
+        self.out_dir = out_dir
+        self.tiers = tiers if tiers is not None else [u.wh for u in UNLOCKS]
+        self.tier_idx = 0
+        self.frame_in_tier = 0
+        self.total_wh = self.tiers[0]
+        self.unlocked = unlocked_count(self.total_wh)
+        self.frame = 0
+        self.done = False
+
+        out_dir.mkdir(parents=True, exist_ok=True)
+        pyxel.init(WIDTH, HEIGHT, title="cwatts town // screenshot", fps=30)
+        for i, hex_col in enumerate(PALETTE):
+            pyxel.colors[i] = hex_col
+        pyxel.run(self.update, self.draw)
+
+    def update(self) -> None:
+        self.frame += 1
+        self.frame_in_tier += 1
+        if self.done:
+            pyxel.quit()
             return
-        self.screenshot_dir.mkdir(parents=True, exist_ok=True)
-        # pyxel.screenshot writes into user's home dir; capture and move.
-        # Use the lower-level capture API instead.
-        path = self.screenshot_dir / f"town-{tier_slug(self.total_wh)}.png"
-        pyxel.screenshot(str(path.with_suffix("")), scale=4)
-        self._screenshot_taken = True
+        if self.frame_in_tier >= self.FRAMES_PER_TIER:
+            slug = tier_slug(self.total_wh)
+            stem = str(self.out_dir / f"town-{slug}")
+            pyxel.screenshot(stem, scale=4)
+            print(f"  wrote town-{slug}.png  ({format_wh(self.total_wh)})")
+            self.tier_idx += 1
+            if self.tier_idx >= len(self.tiers):
+                self.done = True
+                return
+            self.total_wh = self.tiers[self.tier_idx]
+            self.unlocked = unlocked_count(self.total_wh)
+            self.frame_in_tier = 0
+
+    # draw() inherited from TownApp; reads self.unlocked / self.total_wh / self.frame
 
 
 # ───────────────────────────────────────────────────────────────────────────
@@ -467,10 +496,7 @@ def run(total_wh: float, screenshot_dir: Path | None = None) -> int:
         return 1
 
     if screenshot_dir is not None:
-        # Iterate through every tier and snap a screenshot.
-        for tier_wh in SCREENSHOT_TIERS:
-            print(f"  rendering {tier_slug(tier_wh):>8}  ({format_wh(tier_wh)})")
-            TownApp(tier_wh, screenshot_dir=screenshot_dir)
+        ScreenshotSession(screenshot_dir, tiers=SCREENSHOT_TIERS)
         print(f"\nwrote {len(SCREENSHOT_TIERS)} screenshots to {screenshot_dir}")
         return 0
 
