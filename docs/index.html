@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>claudewatts — measure the energy of your Claude Code sessions</title>
+<meta name="description" content="A tiny tool that turns your Claude Code token usage into watt-hours, kettle-boils, and an isometric cyberpunk city that grows with every session.">
+<meta property="og:title" content="claudewatts">
+<meta property="og:description" content="Turn your Claude Code token usage into watt-hours, kettle-boils, and a cyberpunk city.">
+<meta property="og:type" content="website">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-art">
+    <object data="hero.svg" type="image/svg+xml" aria-label="cyberpunk skyline"></object>
+  </div>
+  <div class="hero-text">
+    <h1><span class="bracket">[</span>claudewatts<span class="bracket">]</span></h1>
+    <p class="tagline">measure the joules your Claude Code sessions burn</p>
+    <p class="sub">a tiny meter, an honest methodology, and a city that grows in the dark</p>
+    <div class="cta">
+      <a class="btn primary" href="#install">install</a>
+      <a class="btn" href="https://github.com/jonnonz1/claudewatts">github →</a>
+    </div>
+  </div>
+</header>
+
+<section class="terminal">
+  <pre><code><span class="prompt">$</span> cwatts statusline
+<span class="bolt">⚡</span> 2× active · 3.4 Wh session · 10.9 kWh today · 342.7 kWh total <span class="dim">(≈ powering 11 US homes for a day)</span></code></pre>
+</section>
+
+<section>
+  <h2>what it does</h2>
+  <p>Claude Code records every token. Tokens are the raw material of an LLM's energy cost. <strong>claudewatts</strong> reads your local transcripts (<code>~/.claude/projects/</code>), multiplies by published Wh-per-token estimates, and shows you the result in units a human can actually feel — phone charges, kettle boils, days of running a fridge, weeks of powering a small village.</p>
+  <p>Five scopes, computed in one pass: the current session, every parallel session in the last 10 minutes, everything in this repo, today, and cumulative since you started.</p>
+  <p>It runs entirely on your machine. No network calls, no API keys, no telemetry.</p>
+</section>
+
+<section id="town">
+  <h2>the town</h2>
+  <p>Optional add-on. Run <code>cwatts town</code> and a tiny isometric cyberpunk city pops up in a window. The city is a <em>pure function of your cumulative Wh</em> — the same energy total always produces the same scene. There's no save file, no upgrade currency, no levelling treadmill. You just use Claude Code and the city grows.</p>
+
+  <div class="techtree">
+    <figure>
+      <img src="assets/town-50wh.png" alt="50 Wh — first lamp" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'placeholder',textContent:'50 Wh — first lamp'}))">
+      <figcaption><span class="wh">50 Wh</span><span>first lamp post</span></figcaption>
+    </figure>
+    <figure>
+      <img src="assets/town-500wh.png" alt="500 Wh — first shack" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'placeholder',textContent:'500 Wh — first shack'}))">
+      <figcaption><span class="wh">500 Wh</span><span>shack</span></figcaption>
+    </figure>
+    <figure>
+      <img src="assets/town-5kwh.png" alt="5 kWh — row of cubes" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'placeholder',textContent:'5 kWh — row of cubes'}))">
+      <figcaption><span class="wh">5 kWh</span><span>row of cubes</span></figcaption>
+    </figure>
+    <figure>
+      <img src="assets/town-50kwh.png" alt="50 kWh — first tower" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'placeholder',textContent:'50 kWh — first tower'}))">
+      <figcaption><span class="wh">50 kWh</span><span>first tower</span></figcaption>
+    </figure>
+    <figure>
+      <img src="assets/town-500kwh.png" alt="500 kWh — megabuilding" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'placeholder',textContent:'500 kWh — megabuilding'}))">
+      <figcaption><span class="wh">500 kWh</span><span>megabuilding</span></figcaption>
+    </figure>
+    <figure>
+      <img src="assets/town-5mwh.png" alt="5 MWh — arcology" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'placeholder',textContent:'5 MWh — arcology'}))">
+      <figcaption><span class="wh">5 MWh</span><span>arcology</span></figcaption>
+    </figure>
+  </div>
+
+  <p class="dim">Don't see images? Generate them yourself: <code>cwatts town --screenshot docs/assets/</code>.</p>
+</section>
+
+<section id="install">
+  <h2>install</h2>
+
+  <h3>option 1 — Claude Code plugin</h3>
+  <pre><code><span class="prompt">/</span>plugin marketplace add jonnonz1/claudewatts
+<span class="prompt">/</span>plugin install claudewatts@jonnonz1-claudewatts</code></pre>
+  <p>Restart Claude Code. The statusLine appears automatically.</p>
+
+  <h3>option 2 — Homebrew</h3>
+  <pre><code><span class="prompt">$</span> brew install jonnonz1/tap/claudewatts
+<span class="prompt">$</span> cwatts install claude</code></pre>
+
+  <h3>option 3 — pip (with the town)</h3>
+  <pre><code><span class="prompt">$</span> pip install 'claudewatts[town]'
+<span class="prompt">$</span> cwatts install claude
+<span class="prompt">$</span> cwatts town</code></pre>
+
+  <h3>option 4 — clone</h3>
+  <pre><code><span class="prompt">$</span> git clone https://github.com/jonnonz1/claudewatts ~/claudewatts
+<span class="prompt">$</span> ~/claudewatts/cwatts install claude</code></pre>
+</section>
+
+<section>
+  <h2>methodology</h2>
+  <p>claudewatts uses mid-range estimates from public disclosures (Google's 2025 Gemini figure, Epoch AI's GPT-4o estimate, Simon Couch's 2026 Claude Code study) and applies them to your real token counts. It is <strong>not</strong> precise — Anthropic does not publish per-token energy figures — but it is transparent. Every constant is an environment variable; every assumption is documented.</p>
+  <p><a href="https://github.com/jonnonz1/claudewatts/blob/main/docs/METHODOLOGY.md">Read the full methodology →</a></p>
+</section>
+
+<section>
+  <h2>caveats, clearly stated</h2>
+  <ul>
+    <li><strong>Training is not included.</strong> Per-response inference only.</li>
+    <li><strong>Network, storage, cooling overhead</strong> are partially captured by the datacenter PUE baked into the source estimates. Imperfect.</li>
+    <li><strong>Anthropic-specific per-token figures are not public.</strong> Constants are cross-lab averages for frontier-sized transformer inference.</li>
+    <li><strong>These are Fermi estimates.</strong> Treat them as "order of magnitude", not "to the joule".</li>
+  </ul>
+</section>
+
+<footer>
+  <p>MIT licensed. <a href="https://github.com/jonnonz1/claudewatts">github.com/jonnonz1/claudewatts</a></p>
+</footer>
+
+</body>
+</html>

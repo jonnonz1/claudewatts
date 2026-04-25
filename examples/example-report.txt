@@ -1,0 +1,110 @@
+Claude Code Token Usage — Energy Report
+=======================================
+
+Current session
+───────────────
+  Sessions:       0
+  Messages:       0
+  Input tokens:   0
+  Output tokens:  0
+  Cache reads:    0
+  Cache creates:  0
+  Total tokens:   0
+  Energy:         0.0 mWh
+  Equivalent to:
+        0.0000  Google searches
+        0.0000  LED bulb-hours (10W bulb)
+        0.0000  phone charges
+        0.0000  kettle boils
+        0.0000  loads of laundry
+        0.0000  days of running a fridge
+        0.0000  days of powering a US home
+        0.0000  days of powering a small village (100 homes, 5 kWh each)
+
+Active sessions (last 10m)  [1 session(s)]
+──────────────────────────────────────────
+  Sessions:       1
+  Messages:       2
+  Input tokens:   2
+  Output tokens:  558
+  Cache reads:    238,472
+  Cache creates:  728
+  Total tokens:   239,760
+  Energy:         8.21 Wh
+  Equivalent to:
+         27.37  Google searches
+        0.8210  LED bulb-hours (10W bulb)
+        0.5473  phone charges
+        0.0821  kettle boils
+        0.0164  loads of laundry
+        0.0055  days of running a fridge
+        0.0003  days of powering a US home
+        0.0000  days of powering a small village (100 homes, 5 kWh each)
+
+Repo scope: /Users/jonno/workspace
+──────────────────────────────────
+  Sessions:       291
+  Messages:       60,206
+  Input tokens:   4,031,951
+  Output tokens:  28,686,854
+  Cache reads:    6,307,466,449
+  Cache creates:  346,139,745
+  Total tokens:   6,686,324,999
+  Energy:         337.31 kWh
+  Equivalent to:
+     1,124,353  Google searches
+        33,731  LED bulb-hours (10W bulb)
+        22,487  phone charges
+         3,373  kettle boils
+           675  loads of laundry
+           225  days of running a fridge
+         11.24  days of powering a US home
+        0.6746  days of powering a small village (100 homes, 5 kWh each)
+
+Today (local calendar day)
+──────────────────────────
+  Sessions:       7
+  Messages:       1,179
+  Input tokens:   5,470
+  Output tokens:  1,828,197
+  Cache reads:    278,244,324
+  Cache creates:  11,793,640
+  Total tokens:   291,871,631
+  Energy:         14.63 kWh
+  Equivalent to:
+        48,765  Google searches
+         1,463  LED bulb-hours (10W bulb)
+           975  phone charges
+           146  kettle boils
+         29.26  loads of laundry
+          9.75  days of running a fridge
+        0.4876  days of powering a US home
+        0.0293  days of powering a small village (100 homes, 5 kWh each)
+
+Cumulative (all recorded sessions)
+──────────────────────────────────
+  Sessions:       296
+  Messages:       61,133
+  Input tokens:   4,038,342
+  Output tokens:  29,232,785
+  Cache reads:    6,411,062,636
+  Cache creates:  351,231,955
+  Total tokens:   6,795,565,718
+  Energy:         342.76 kWh
+  Equivalent to:
+     1,142,540  Google searches
+        34,276  LED bulb-hours (10W bulb)
+        22,851  phone charges
+         3,428  kettle boils
+           686  loads of laundry
+           229  days of running a fridge
+         11.43  days of powering a US home
+        0.6855  days of powering a small village (100 homes, 5 kWh each)
+
+Headline: your Claude Code usage has consumed roughly
+  342.76 kWh — about 11 days of powering a US home.
+
+Energy constants (Wh/token):
+  input=0.0003  output=0.0015
+  cache_read=3e-05  cache_create=0.0003
+Override via CPM_WH_INPUT / CPM_WH_OUTPUT / CPM_WH_CACHE_READ / CPM_WH_CACHE_CREATE.

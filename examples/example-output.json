@@ -1,0 +1,61 @@
+{
+  "session": {
+    "sessions": 0,
+    "messages": 0,
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "cache_read_tokens": 0,
+    "cache_create_tokens": 0,
+    "total_tokens": 0,
+    "wh": 0.0
+  },
+  "active": {
+    "sessions": 2,
+    "messages": 5,
+    "input_tokens": 20,
+    "output_tokens": 2391,
+    "cache_read_tokens": 2147765,
+    "cache_create_tokens": 12644,
+    "total_tokens": 2162820,
+    "wh": 71.81865
+  },
+  "repo": {
+    "sessions": 291,
+    "messages": 60209,
+    "input_tokens": 4031969,
+    "output_tokens": 28688687,
+    "cache_read_tokens": 6309375742,
+    "cache_create_tokens": 346151661,
+    "total_tokens": 6688248059,
+    "wh": 337369.39176
+  },
+  "repo_path": "/Users/jonno/workspace",
+  "today": {
+    "sessions": 7,
+    "messages": 1182,
+    "input_tokens": 5488,
+    "output_tokens": 1830030,
+    "cache_read_tokens": 280153617,
+    "cache_create_tokens": 11805556,
+    "total_tokens": 293794691,
+    "wh": 14692.96671
+  },
+  "total": {
+    "sessions": 296,
+    "messages": 61136,
+    "input_tokens": 4038360,
+    "output_tokens": 29234618,
+    "cache_read_tokens": 6412971929,
+    "cache_create_tokens": 351243871,
+    "total_tokens": 6797488778,
+    "wh": 342825.75417
+  },
+  "comparison": "11 days of powering a US home",
+  "constants": {
+    "wh_per_input_token": 0.0003,
+    "wh_per_output_token": 0.0015,
+    "wh_per_cache_read_token": 3e-05,
+    "wh_per_cache_create_token": 0.0003,
+    "active_window_minutes": 10
+  }
+}
