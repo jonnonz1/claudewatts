@@ -1,17 +1,21 @@
 # claudewatts
 
-> Estimate the electrical energy your Claude Code sessions consume, in real time, in units a human can actually feel.
+> A live energy meter in your Claude Code status bar.
 
 **🌐 [Project page →](https://jonnonz1.github.io/claudewatts/)**
 
 <!-- BLOG_LINK_PLACEHOLDER: replace with your blog post URL -->
 📝 Background and motivation: [your blog post here]
 
+claudewatts installs a one-line meter into Claude Code's [`statusLine`](https://docs.claude.com/en/docs/claude-code/statusline) hook. Every time Claude Code refreshes its status bar, claudewatts reads your local transcripts, multiplies tokens by published Wh-per-token estimates, and prints a live readout in units a human can actually feel:
+
 ```
 ⚡ 2× active · 3.4 Wh session · 10.9 kWh today · 342.7 kWh total (≈ powering 11 US homes for a day)
 ```
 
-There's also an optional **cyberpunk city that grows with your cumulative Wh** — see [`cwatts town`](#optional-cwatts-town) below.
+That line lives at the bottom of every Claude Code session after one-line install (see [Install](#install) below).
+
+There's also an optional **cyberpunk city that grows with your cumulative Wh** — see [`cwatts town`](#optional-cwatts-town).
 
 Claude Code already records token usage, and token usage is the raw material of an LLM's energy cost. This tool reads your local transcript files (`~/.claude/projects/**/*.jsonl`), multiplies tokens by published watt-hour-per-token estimates, and renders the result in familiar units: Google searches, kettle boils, phone charges, village-days. It runs entirely on your machine — no network calls, no API keys, no telemetry.
 

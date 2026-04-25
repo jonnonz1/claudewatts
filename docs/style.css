@@ -185,6 +185,13 @@ pre code { background: none; padding: 0; color: inherit; }
   white-space: pre-wrap;
   word-break: break-word;
 }
+.terminal .caption {
+  font-family: var(--mono);
+  font-size: 0.85rem;
+  color: var(--cyan);
+  margin: 0 0 0.6rem 0;
+  text-align: center;
+}
 .terminal .hint {
   font-family: var(--mono);
   font-size: 0.78rem;
