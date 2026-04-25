@@ -1,0 +1,13 @@
+{
+  "name": "claudewatts",
+  "description": "Energy meter for Claude Code — turns your token usage into watt-hours, kettle-boils and a cyberpunk city.",
+  "version": "0.2.0",
+  "homepage": "https://jonnonz1.github.io/claudewatts/",
+  "repository": "https://github.com/jonnonz1/claudewatts",
+  "author": { "name": "John" },
+  "license": "MIT",
+  "statusLine": {
+    "type": "command",
+    "command": "${CLAUDE_PLUGIN_ROOT}/cwatts statusline"
+  }
+}

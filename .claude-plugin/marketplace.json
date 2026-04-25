@@ -1,0 +1,17 @@
+{
+  "name": "jonnonz1-claudewatts",
+  "owner": {
+    "name": "John",
+    "url": "https://github.com/jonnonz1"
+  },
+  "plugins": [
+    {
+      "name": "claudewatts",
+      "source": ".",
+      "description": "Energy meter for Claude Code — watt-hours, kettle-boils, and an optional cyberpunk city.",
+      "homepage": "https://jonnonz1.github.io/claudewatts/",
+      "category": "monitoring",
+      "tags": ["energy", "statusline", "watts", "sustainability", "monitoring"]
+    }
+  ]
+}
