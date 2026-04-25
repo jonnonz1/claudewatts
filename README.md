@@ -154,14 +154,6 @@ To regenerate the per-tier screenshots used on the project page:
 ./scripts/generate-screenshots.sh
 ```
 
-## Caveats, clearly stated
-
-- **Training is not included.** Per-response inference only. Training amortization adds a non-trivial but heavily debated fraction on top.
-- **Network, storage, cooling overhead** are partially captured by the datacenter-PUE factor baked into the source estimates, but imperfect.
-- **Anthropic-specific per-token figures are not public.** Constants are cross-lab averages for frontier-sized transformer inference.
-- **Cache economics are modelled but simplified.** Cache reads are treated as ~10× cheaper than fresh input tokens, matching pricing. Real energy ratio is uncertain.
-- **Your mileage will vary.** These are Fermi estimates. Treat them as "order of magnitude", not "to the joule".
-
 ## License
 
 MIT. See [LICENSE](LICENSE).
