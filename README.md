@@ -4,9 +4,6 @@
 
 **🌐 [Project page →](https://jonnonz1.github.io/claudewatts/)**
 
-<!-- BLOG_LINK_PLACEHOLDER: replace with your blog post URL -->
-📝 Background and motivation: [your blog post here]
-
 claudewatts installs a one-line meter into Claude Code's [`statusLine`](https://docs.claude.com/en/docs/claude-code/statusline) hook. Every time Claude Code refreshes its status bar, claudewatts reads your local transcripts, multiplies tokens by published Wh-per-token estimates, and prints a live readout in units a human can actually feel:
 
 ```
